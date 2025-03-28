@@ -1,4 +1,4 @@
-name: docker-rsync-server
+name: rsync-server
 
 on:
   push:
@@ -31,5 +31,5 @@ jobs:
         context: .
         push: true
         tags: |
-          ghcr.io/${{ env.OWNER }}/docker-rsync-server:latest
-          ghcr.io/${{ env.OWNER }}/docker-rsync-server:${{ github.sha }} 
+          ghcr.io/${{ env.OWNER }}/rsync-server:latest
+          ghcr.io/${{ env.OWNER }}/rsync-server:${{ github.sha }} 
