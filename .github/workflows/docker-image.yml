@@ -43,14 +43,17 @@ jobs:
           type=semver,pattern={{major}}
           type=sha
 
+    - name: Set lowercase owner name
+      run: echo "LOWERCASE_OWNER=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
         push: true
         tags: |
-          ghcr.io/${{ github.repository_owner,, }}/docker-rsync-server:latest
-          ghcr.io/${{ github.repository_owner,, }}/docker-rsync-server:${{ github.sha }}
+          ghcr.io/${{ env.LOWERCASE_OWNER }}/docker-rsync-server:latest
+          ghcr.io/${{ env.LOWERCASE_OWNER }}/docker-rsync-server:${{ github.sha }}
         labels: |
           org.opencontainers.image.source=https://github.com/${{ github.repository }}
           org.opencontainers.image.revision=${{ github.sha }} 
